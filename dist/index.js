@@ -9,7 +9,9 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 module.exports = singleton;
 
 function singleton(ripple) {
-  log("exposing global");(client ? window : global).ripple = ripple;
+  log("exposing global");
+  console.log("client", client);(client ? window : global).ripple = ripple;
+  return ripple;
 }
 
 var client = _interopRequire(require("utilise/client"));
