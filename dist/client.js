@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (global){
 "use strict";
 
 /* istanbul ignore next */
@@ -11,23 +10,19 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 module.exports = singleton;
 
 function singleton(ripple) {
-  log("exposing global");(client ? window : global).ripple = ripple;
+  log("exposing global");
+  owner.ripple = ripple;
   return ripple;
 }
 
-var client = _interopRequire(require("utilise/client"));
+var owner = _interopRequire(require("utilise/owner"));
 
 var log = _interopRequire(require("utilise/log"));
 
 log = log("[ri/singleton]");
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"utilise/client":2,"utilise/log":3}],2:[function(require,module,exports){
-module.exports = require('client')
-},{"client":4}],3:[function(require,module,exports){
+},{"utilise/log":2,"utilise/owner":8}],2:[function(require,module,exports){
 module.exports = require('log')
-},{"log":5}],4:[function(require,module,exports){
-module.exports = typeof window != 'undefined'
-},{}],5:[function(require,module,exports){
+},{"log":3}],3:[function(require,module,exports){
 var is = require('is')
   , to = require('to')
 
@@ -39,7 +34,7 @@ module.exports = function log(prefix){
     return console.log.apply(console, args), d
   }
 }
-},{"is":6,"to":7}],6:[function(require,module,exports){
+},{"is":4,"to":5}],4:[function(require,module,exports){
 module.exports = { 
   fn     : isFunction
 , str    : isString
@@ -94,7 +89,7 @@ function isIn(set) {
     return ~set.indexOf(d)
   }
 }
-},{}],7:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = { 
   arr : toArray
 }
@@ -102,4 +97,12 @@ module.exports = {
 function toArray(d){
   return Array.prototype.slice.call(d, 0)
 }
-},{}]},{},[1]);
+},{}],6:[function(require,module,exports){
+(function (global){
+module.exports = require('client') ? window : global
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"client":7}],7:[function(require,module,exports){
+module.exports = typeof window != 'undefined'
+},{}],8:[function(require,module,exports){
+module.exports = require('owner')
+},{"owner":6}]},{},[1]);

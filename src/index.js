@@ -3,10 +3,10 @@
 // -------------------------------------------
 export default function singleton(ripple){
   log('exposing global')
-  ;(client ? window : global).ripple = ripple
+  owner.ripple = ripple
   return ripple
 }
 
-import client from 'utilise/client'
+import owner from 'utilise/owner'
 import log from 'utilise/log'
 log = log('[ri/singleton]')
