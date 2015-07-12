@@ -2,7 +2,7 @@
 // Exposes a convenient global instance 
 // -------------------------------------------
 export default function singleton(ripple){
-  log('exposing global')
+  log('creating')
   owner.ripple = ripple
   return ripple
 }

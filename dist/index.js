@@ -9,7 +9,7 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 module.exports = singleton;
 
 function singleton(ripple) {
-  log("exposing global");
+  log("creating");
   owner.ripple = ripple;
   return ripple;
 }
