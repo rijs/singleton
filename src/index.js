@@ -3,7 +3,7 @@
 // -------------------------------------------
 export default function singleton(ripple){
   log('creating')
-  owner.ripple = ripple
+  if (!owner.ripple) owner.ripple = ripple
   return ripple
 }
 
