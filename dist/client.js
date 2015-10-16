@@ -1,20 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = require('log')
-},{"log":2}],2:[function(require,module,exports){
-var is = require('is')
-  , to = require('to')
-  , owner = require('owner')
-
-module.exports = function log(prefix){
-  return function(d){
-    if (!owner.console || !console.log.apply) return d;
-    is.arr(arguments[2]) && (arguments[2] = arguments[2].length)
-    var args = to.arr(arguments)
-    args.unshift(prefix.grey ? prefix.grey : prefix)
-    return console.log.apply(console, args), d
-  }
-}
-},{"is":3,"owner":4,"to":6}],3:[function(require,module,exports){
+module.exports = typeof window != 'undefined'
+},{}],2:[function(require,module,exports){
 module.exports = is
 is.fn     = isFunction
 is.str    = isString
@@ -82,32 +68,54 @@ function isDef(d) {
 
 function isIn(set) {
   return function(d){
-    return  set.indexOf 
-         ? ~set.indexOf(d)
-         :  d in set
+    return !set ? false  
+         : set.indexOf ? ~set.indexOf(d)
+         : d in set
   }
 }
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
+var is = require('utilise/is')
+  , to = require('utilise/to')
+  , owner = require('utilise/owner')
+
+module.exports = function log(prefix){
+  return function(d){
+    if (!owner.console || !console.log.apply) return d;
+    is.arr(arguments[2]) && (arguments[2] = arguments[2].length)
+    var args = to.arr(arguments)
+    args.unshift(prefix.grey ? prefix.grey : prefix)
+    return console.log.apply(console, args), d
+  }
+}
+},{"utilise/is":2,"utilise/owner":4,"utilise/to":5}],4:[function(require,module,exports){
 (function (global){
-module.exports = require('client') ? /* istanbul ignore next */ window : global
+module.exports = require('utilise/client') ? /* istanbul ignore next */ window : global
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"client":5}],5:[function(require,module,exports){
-module.exports = typeof window != 'undefined'
-},{}],6:[function(require,module,exports){
+},{"utilise/client":1}],5:[function(require,module,exports){
 module.exports = { 
-  arr : toArray
+  arr: toArray
+, obj: toObject
 }
 
 function toArray(d){
   return Array.prototype.slice.call(d, 0)
 }
-},{}],7:[function(require,module,exports){
-arguments[4][4][0].apply(exports,arguments)
-},{"client":8,"dup":4}],8:[function(require,module,exports){
-arguments[4][5][0].apply(exports,arguments)
-},{"dup":5}],9:[function(require,module,exports){
-module.exports = require('owner')
-},{"owner":7}],10:[function(require,module,exports){
+
+function toObject(d) {
+  var by = 'id'
+    , o = {}
+
+  return arguments.length == 1 
+    ? (by = d, reduce)
+    : reduce.apply(this, arguments)
+
+  function reduce(p,v,i){
+    if (i === 0) p = {}
+    p[v[by]] = v
+    return p
+  }
+}
+},{}],6:[function(require,module,exports){
 "use strict";
 
 /* istanbul ignore next */
@@ -129,4 +137,4 @@ var owner = _interopRequire(require("utilise/owner"));
 var log = _interopRequire(require("utilise/log"));
 
 log = log("[ri/singleton]");
-},{"utilise/log":1,"utilise/owner":9}]},{},[10]);
+},{"utilise/log":3,"utilise/owner":4}]},{},[6]);
