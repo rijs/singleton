@@ -1,6 +1,6 @@
 var expect = require('chai').expect
   , owner = require('utilise/owner')
-  , singleton = require('./')
+  , singleton = require('./').default
 
 describe('Singleton', function() {
 

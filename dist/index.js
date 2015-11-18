@@ -1,21 +1,24 @@
-"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = singleton;
+
+var _owner = require('utilise/owner');
+
+var _owner2 = _interopRequireDefault(_owner);
 
 /* istanbul ignore next */
-var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // -------------------------------------------
 // Exposes a convenient global instance
 // -------------------------------------------
-module.exports = singleton;
-
 function singleton(ripple) {
-  log("creating");
-  if (!owner.ripple) owner.ripple = ripple;
+  log('creating');
+  if (!_owner2.default.ripple) _owner2.default.ripple = ripple;
   return ripple;
 }
 
-var owner = _interopRequire(require("utilise/owner"));
-
-var log = _interopRequire(require("utilise/log"));
-
-log = log("[ri/singleton]");
+var log = require('utilise/log')('[ri/singleton]');
